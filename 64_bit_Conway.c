@@ -16,7 +16,7 @@ typedef struct
   uint64_t grid;
 } Board;
 
-Board init_board(int width, int height)
+Board init_board_random(int width, int height)
 {
   Board board = {0};
   board.rows = height;
@@ -35,6 +35,16 @@ Board init_board(int width, int height)
   }
   return board;
 }
+
+Board init_board_seed(int width, int height, uint64_t seed)
+{
+  Board board = {0};
+  board.rows = height;
+  board.cols = width;
+  board.grid = seed;
+  return board;
+}
+
 
 bool is_set(Board board, int cellX, int cellY)
 {
@@ -108,7 +118,7 @@ int main()
   InitWindow(WIDTH, HEIGHT, TITLE);
   SetTargetFPS(1);
   
-  Board board = init_board(GRID_SIZE, GRID_SIZE);
+  Board board = init_board_seed(GRID_SIZE, GRID_SIZE, 9060217272139776);
   
   while (!WindowShouldClose()) {
     BeginDrawing();
