@@ -106,25 +106,25 @@ int count_live_neigbours(Board* board, int cellX, int cellY)
   int count = 0;
   
   for (int dx = -1; dx <= 1; ++dx)
+  {
+	for (int dy = -1; dy <= 1; ++dy)
 	{
-		for (int dy = -1; dy <= 1; ++dy)
+		if (dx == 0 && dy == 0)
+			continue;
+
+		int neighborX = cellX + dx;
+		int neighborY = cellY + dy;
+
+		if (neighborX >= 0 && neighborX < board->cols && 
+			neighborY >= 0 && neighborY < board->rows) 
 		{
-			if (dx == 0 && dy == 0)
-				continue;
-
-			int neighborX = cellX + dx;
-			int neighborY = cellY + dy;
-
-			if (neighborX >= 0 && neighborX < board->cols && 
-				neighborY >= 0 && neighborY < board->rows) 
+			if (board->grid[neighborY][neighborX] == 1)
 			{
-				if (board->grid[neighborY][neighborX] == 1)
-				{
-					count++;
-				}
+				count++;
 			}
 		}
 	}
+  }
   return count;
 }
 
